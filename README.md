@@ -10,4 +10,4 @@ Version 1.0 released August 1, 2018 at 2:30am
 + Several bugs currently exist that need to be fixed, such as all coordinates data for all objects being stored into 1 list (super confusing) and right now it is not possible to enter decimals (floating point numbers), only integers (whole numbers)
 + Several optimizations need to be made including removing duplicate code, removing excess comments and completing a few concepts
 + In the future we will have a GUI and a visual representation of the objects interacting with each other as if they were planets in space
-+ Future possibilities include the collision detection, the ability for objects that touch to combine and gain mass or a game functionality
++ Future possibilities include collision detection, the ability for objects that touch to combine and gain mass or a game functionality
