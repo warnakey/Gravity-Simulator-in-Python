@@ -1,148 +1,159 @@
 #!/usr/bin/python
-import time
-import os
-import sys
-from sys import platform
-from IPython.display import clear_output
 
-#Use this for cross platform clear screen.
-if platform == 'linux' or platform == 'linux2':
-    clear = lambda: os.system('clear')
-elif platform == 'darwin':
-    clear = lambda: os.system('clear')
-elif platform == 'win32':
-    clear = lambda: os.system('cls')
-#Then call "clear()" to clear the screen.
-#And call "clear_output()" to clear the contents of a cell in Jupyter Notebook
-
-#################################################################################
-                      #Example land#
-#################################################################################
-#run = input("Start? > ")
-#mins = 0
-# Only run if the user types in "start"
-#if run == "start":
-    # Loop until we reach 20 minutes running
-#    while mins != 20:
-#        print(">>>>>>>>>>>>>>>>>>>>>"), mins
-        # Sleep for a minute
-#        time.sleep(60)
-        # Increment the minute total
-#        mins += 1
-    # Bring up the dialog box here
-    
-#gravity_on == True
-    
-#while gravity_on == True:
-#    sec = 0
-#    if sec = 
-#
-#
-#text examples of how to clear the screen if i should want to do that for any reason
-#who = input("Do you want a hug? ")
-#clear()
-#clear_output()
-#print ("Big hugs are in your future")
-#time.sleep(2)
-#clear()
-#clear_output()
-
-from time import gmtime, localtime, strftime
-
-show_gmt_time = 'print("Greenwich Mean Time: " + strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime()))'
-show_local_time = 'print("Local Time: " + strftime("%a, %d %b %Y %H:%M:%S +0000", localtime()))'
-
-#a stopwatch that is a prototype for a future time system
-def stopwatch(seconds):
-    start = time.time()
-    time.process_time()    
-    elapsed = 0
-    while elapsed < seconds:
-        elapsed = time.time() - start
-        exec(show_local_time)
-        print()
-        print(int(elapsed))
-        time.sleep(1)
-        clear()
-        clear_output() 
-
-stopwatch(1)
-
-#this is the beginning of the actual gravity simulator
+print("This tool will output a table of data containing the x, y and z coordinates of up to 5 objects.\n\n")
 
 while True:
+    
+# ENTER HOW MANY OBJECTS IN SYSTEM ----------------------------------------------------------------------------
 
     print("How many objects do you want?")
 
     try:
         number_of_objects = int(input())
+        print()
         if number_of_objects < 1 or number_of_objects > 5:
-            raise ValueError #this will send it to the print message and back to the input option
+            raise ValueError                        # this will send it to the print message and back to the input option
             continue
     except ValueError:
         print("\nInvalid selection. The number must be between 1-5.\n")
         print()
         continue
+        
+    print("There are " + str(number_of_objects) + " objects in your system.")
+    
+    # create names for the objects
+    x = number_of_objects
+    for i in range(x):
+        i = i+1
+        object = "object " + str(i)
+        # print the object names. I want to store them as variables though. Not sure how.
+        print(object)
+        #i = i-1
+        
+    print("\n----------------------------\n")
+    
+    
+# ENTER MASS OF OBJECTS IN SYSTEM ----------------------------------------------------------------------------
 
     num_done = 0
     
-    print("\nHere we are\n")
-
     while num_done < number_of_objects:
         x = number_of_objects
         for i in range(x):
+            i = i+1
             print(f"What is the mass of object {i}?")
             object = "mass_object_" + str(i)
-            print(object)
-            input()
+            int(input())
             print()
         break
-    
-    starting_points_defined = 0
         
+    print("\n----------------------------\n")
+    
+    
+# ENTER XYZ COORDINATES OF OBJECTS IN SYSTEM -----------------------------------------------------------------
+        
+    starting_points_defined = 0
+    
     while starting_points_defined < number_of_objects:
+        
+        # Define starting coordinate variables 
         x_pos = 0
         y_pos = 0
         z_pos = 0
         o = number_of_objects
         
-        positionlist = []
-        name_and_positionlist = []
+        # these are the lists we will need
+        all_xyz_values = []                                     # this will be ALL x y z values in a big list
+        name_and_coords = []                                    # output should look like ["object 1", 23, 34, 45]
+        names_of_xyz_coord_lists = []                           # list of names of the xyz coord lists
         
+        # Start a loop that creates a list of xyz coords for each object
         for i in range(o):
+            i = i+1
+            
+            coord_lst = "coord_lst_" + str(i)                   # name the current xyz coord list
+            names_of_xyz_coord_lists.append(coord_lst)          # make a list of the names of the xyz coord lists
+            
+            
+# X COORDINATES --------------------------------------------------------------------------------------
+
             print(f"What is the starting position on the x axis of object {i}?")
-            xobject = "xobject_" + str(i)
-            print(xobject)
-            start_pos_xaxis = input()
-            positionlist.append(start_pos_xaxis) # add input to the list
-            start_pos_xaxis = name_and_positionlist.insert(0, xobject)
-            name_and_positionlist.append(start_pos_xaxis) # add input to the list
+            
+            #xobject = "xobject_" + str(i)                      # create a name for the x value of the current object
+            #object_names.append(xobject)                       # add name of each x value to a list (just in case?)
+            
+            start_pos_xaxis = int(input())                      # where the x value is actually inputted by the user
+            
+            all_xyz_values.append(start_pos_xaxis)              # add x input to a list of all xyz coord values
+            
             print()
+            
+            
+# Y COORDINATES --------------------------------------------------------------------------------------
+            
             print(f"What is the starting position on the y axis of object {i}?")
-            yobject = "yobject_" + str(i)
-            print(yobject)
-            start_pos_yaxis = input()
-            positionlist.append(start_pos_yaxis) # add input to the list
-            start_pos_yaxis = name_and_positionlist.insert(0, yobject)
-            name_and_positionlist.append(start_pos_yaxis) # add input to the list
+            
+            #yobject = "yobject_" + str(i)                      # create a name for the y value of each object
+            #object_names.append(yobject)                       # add y input to the list
+            
+            start_pos_yaxis = int(input())                      # where the y value is actually inputted by the user
+            
+            all_xyz_values.append(start_pos_yaxis)              # add y input to a list of all xyz coord values       
+            
             print()
+            
+            
+# Z COORDINATES --------------------------------------------------------------------------------------
+            
             print(f"What is the starting position on the z axis of object {i}?")
-            zobject = "zobject_" + str(i)
-            print(zobject)
-            start_pos_zaxis = input()
-            positionlist.append(start_pos_zaxis) # add input to the list
-            start_pos_zaxis = name_and_positionlist.insert(0, zobject)
-            name_and_positionlist.append(start_pos_zaxis) # add input to the list
-            print()     
+            
+            #zobject = "zobject_" + str(i)                      # create a name for the z value of each object
+            #object_names.append(zobject)                       # add z input to the list
+            
+            start_pos_zaxis = int(input())                      # where the z value is actually inputted by the user
+            
+            all_xyz_values.append(start_pos_zaxis)              # add Z input to a list of all xyz coord values 
+            
+            
+# CLEAN UP A FEW THINGS --------------------------------------------------------------------------------
+            
+            # all starting points (xyz coords) for current object have been defined, therefore, add 1 to value
+            starting_points_defined = starting_points_defined+1
+            
+            # earlier I made the i integer in the loop +1, so this is just so the loop doesn't get screwy (i think)
+            i = i-1
+            
+            print("\n----------------------------\n")
+                     
+            
+# OUTPUT THE RESULT --------------------------------------------------------------------------------------
+    
+        print("\n########################################################################################\n\n")
+        print("These are the coordinates for the bodies of your system in table layout:\n")
         
-        print("These are the coordinates for the bodies of your system:")
-        #FIX THIS so each object appears in its own list inside the positionlist list because it is confusing right now
-        print(positionlist)
-        #FIX THIS! I want this to look like this ['object1', '2', '11', '45']
-        #print(name_and_positionlist)
-        print()
-        break        
+        xyz_output = all_xyz_values
+        
+        print("\nObject Name | X | Y | Z ")
+         # printing the list using loop
+        for x in range(number_of_objects):
+            x = x+1
+            
+            final_output = "object " + str(x) + " | " + str(xyz_output[0]) + " | " + str(xyz_output[1]) + " | " + str(xyz_output[2])
+            
+            print(final_output)
+            for e in range(2):
+                #popping brings the last value from the previous list to the first value of the next list, which is bad
+                #all_xyz_values.pop(0)
+                del xyz_output[:3]
+                break
+            x = x-1
+            
+        print("\n\n########################################################################################\n\n")
+        
+        break
         
     break
-        
-print("End")
+
+# END --------------------------------------------------------------------------------------
+
+print("\n\nEnd")
