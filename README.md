@@ -3,6 +3,13 @@ Gravity Simulator
 
 A gravity simulator in python
 
+Version 1.1 released August 14, 2018 at 12:30am
++ Updated Gravity Simulator to actually do something useful!
++ Removed tons of useless code
++ Made the program output a usable table of x, y & z coordinates that can be used to plot the location of the objects in the system
++ Right now the part of the program that asks for mass for each object is not being put to use. It will eventually be used to calculate gravity.
++ It took me two weeks to figure out how to export the data in a usable format.
+
 Version 1.0 released August 1, 2018 at 2:30am
 + Initial commit
 + Allows you to enter a number of objects (between 1 and 5), enter their mass, then enter their x, y and z coordinates in space
@@ -11,10 +18,3 @@ Version 1.0 released August 1, 2018 at 2:30am
 + Several optimizations need to be made including removing duplicate code, removing excess comments and completing a few concepts
 + In the future we will have a GUI and a visual representation of the objects interacting with each other as if they were planets in space
 + Future possibilities include collision detection, the ability for objects that touch to combine and gain mass or a game functionality
-
-Version 1.1 released August 14, 2018 at 12:30am
-+ Updated Gravity Simulator to actually do something useful!
-+ Removed tons of useless code
-+ Made the program output a usable table of x, y & z coordinates that can be used to plot the location of the objects in the system
-+ Right now the part of the program that asks for mass for each object is not being put to use. It will eventually be used to calculate gravity.
-+ It took me two weeks to figure out how to export the data in a usable format.
