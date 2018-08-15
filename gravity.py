@@ -1,158 +1,106 @@
 #!/usr/bin/python
 
-print("This tool will output a table of data containing the x, y and z coordinates of up to 5 objects.\n\n")
-
 while True:
+    print("This tool will output a table of data containing the x, y and z coordinates of up to 5 objects.\n\n")
     
-# ENTER HOW MANY OBJECTS IN SYSTEM ----------------------------------------------------------------------------
-
-    print("How many objects do you want?")
-
+    # ENTER HOW MANY OBJECTS IN SYSTEM
     try:
-        number_of_objects = int(input())
-        print()
-        if number_of_objects < 1 or number_of_objects > 5:
-            raise ValueError                        # this will send it to the print message and back to the input option
-            continue
+        number_of_objects = int(input("How many objects do you want? "))
+        if not 1 <= number_of_objects <= 5:
+            raise ValueError                # this will send it to the print message and back to the input option
     except ValueError:
-        print("\nInvalid selection. The number must be between 1-5.\n")
-        print()
+        print("\nInvalid selection. The number must be between 1-5.\n\n")
         continue
-        
-    print("There are " + str(number_of_objects) + " objects in your system.")
+    
+    # show a different output if there is only 1 object
+    if number_of_objects == 1:
+        print("\nThere is 1 object in your system")
+    else:
+        print()
+        print(f"There are {number_of_objects} objects in your system.")
     
     # create names for the objects
-    x = number_of_objects
-    for i in range(x):
-        i = i+1
-        object = "object " + str(i)
-        # print the object names. I want to store them as variables though. Not sure how.
-        print(object)
-        #i = i-1
+    for i in range(1, number_of_objects + 1):
+        print("object", i)
         
     print("\n----------------------------\n")
     
-    
-# ENTER MASS OF OBJECTS IN SYSTEM ----------------------------------------------------------------------------
+    objects = []
+    # ENTER MASS OF OBJECTS IN SYSTEM
+    for i in range(1, number_of_objects + 1):
+        object_info = [i]
+        
+        valid_mass = True
+        
+        while valid_mass == True:
+            # enter the mass of objects and make sure the input is a number in the correct range
+            try:
+                mass = int(input(f"What is the mass of object {i}? "))
+                if not mass >= 0 and mass <= 9999999:
+                    raise ValueError
+                else:
+                    break
+            except ValueError:
+                print("\nInvalid selection. Mass must be between 0 and 9,999,999.\n")
+                continue
+        
+        need_starting_positions = True
+        
+        # loop created so it will show an error message if someone forgets to enter 3 values in the single line input
+        while need_starting_positions == True:
+            try:
+                x, y, z = input(f"What is the starting position of object {i} in the format x y z? ").split()
+                print()
+                if x == "" or y == "" or z == "" or x.isdigit() != True or y.isdigit() != True or z.isdigit() != True:
+                    raise ValueError
+                else:
+                    break
+            except ValueError:
+                print("\nInvalid Selection. Please enter 3 values, like so: '3 45 500'\n")
+                continue
+        
+        objects.append((i, mass, int(x), int(y), int(z)))
+        print("\n----------------------------\n")
 
-    num_done = 0
+    # OUTPUT THE RESULT
     
-    while num_done < number_of_objects:
-        x = number_of_objects
-        for i in range(x):
-            i = i+1
-            print(f"What is the mass of object {i}?")
-            object = "mass_object_" + str(i)
-            int(input())
-            print()
-        break
-        
-    print("\n----------------------------\n")
+    print("\n########################################################################################\n\n")
+    print("These are the coordinates for the bodies of your system in table layout:\n")
     
+    class style:
+        bold = '\033[1m'
+        end = '\033[0m'
+        
+    print(f"{style.bold}Object Name | X | Y | Z{style.end}")
+    # printing the list using loop
+    for i, mass, x, y, z in objects:
+        final_output = f"object {i} | {x} | {y} | {z}"
+        print(final_output)
+    print("\n\n########################################################################################\n\n")
     
-# ENTER XYZ COORDINATES OF OBJECTS IN SYSTEM -----------------------------------------------------------------
-        
-    starting_points_defined = 0
+    # RUN THE PROGRAM AGAIN OR END IT
     
-    while starting_points_defined < number_of_objects:
-        
-        # Define starting coordinate variables 
-        x_pos = 0
-        y_pos = 0
-        z_pos = 0
-        o = number_of_objects
-        
-        # these are the lists we will need
-        all_xyz_values = []                                     # this will be ALL x y z values in a big list
-        name_and_coords = []                                    # output should look like ["object 1", 23, 34, 45]
-        names_of_xyz_coord_lists = []                           # list of names of the xyz coord lists
-        
-        # Start a loop that creates a list of xyz coords for each object
-        for i in range(o):
-            i = i+1
-            
-            coord_lst = "coord_lst_" + str(i)                   # name the current xyz coord list
-            names_of_xyz_coord_lists.append(coord_lst)          # make a list of the names of the xyz coord lists
-            
-            
-# X COORDINATES --------------------------------------------------------------------------------------
-
-            print(f"What is the starting position on the x axis of object {i}?")
-            
-            #xobject = "xobject_" + str(i)                      # create a name for the x value of the current object
-            #object_names.append(xobject)                       # add name of each x value to a list (just in case?)
-            
-            start_pos_xaxis = int(input())                      # where the x value is actually inputted by the user
-            
-            all_xyz_values.append(start_pos_xaxis)              # add x input to a list of all xyz coord values
-            
-            print()
-            
-            
-# Y COORDINATES --------------------------------------------------------------------------------------
-            
-            print(f"What is the starting position on the y axis of object {i}?")
-            
-            #yobject = "yobject_" + str(i)                      # create a name for the y value of each object
-            #object_names.append(yobject)                       # add y input to the list
-            
-            start_pos_yaxis = int(input())                      # where the y value is actually inputted by the user
-            
-            all_xyz_values.append(start_pos_yaxis)              # add y input to a list of all xyz coord values       
-            
-            print()
-            
-            
-# Z COORDINATES --------------------------------------------------------------------------------------
-            
-            print(f"What is the starting position on the z axis of object {i}?")
-            
-            #zobject = "zobject_" + str(i)                      # create a name for the z value of each object
-            #object_names.append(zobject)                       # add z input to the list
-            
-            start_pos_zaxis = int(input())                      # where the z value is actually inputted by the user
-            
-            all_xyz_values.append(start_pos_zaxis)              # add Z input to a list of all xyz coord values 
-            
-            
-# CLEAN UP A FEW THINGS --------------------------------------------------------------------------------
-            
-            # all starting points (xyz coords) for current object have been defined, therefore, add 1 to value
-            starting_points_defined = starting_points_defined+1
-            
-            # earlier I made the i integer in the loop +1, so this is just so the loop doesn't get screwy (i think)
-            i = i-1
-            
+    again = True
+    
+    # create a loop asking if they want to run the game again. If something other than yes or no is entered it asks again.
+    while again == True:
+        run_again = input("Do you want to run the program again? Yes or No? ")
+        run_again = run_again.lower()
+    
+        # run again option
+        if run_again == "yes":
             print("\n----------------------------\n")
-                     
-            
-# OUTPUT THE RESULT --------------------------------------------------------------------------------------
+            break
+        elif run_again == "no":
+            break
+        else:
+            print("\nPlease type either 'Yes' or 'No'.\n")
     
-        print("\n########################################################################################\n\n")
-        print("These are the coordinates for the bodies of your system in table layout:\n")
-        
-        xyz_output = all_xyz_values
-        
-        print("\nObject Name | X | Y | Z ")
-         # printing the list using loop
-        for x in range(number_of_objects):
-            x = x+1
-            
-            final_output = "object " + str(x) + " | " + str(xyz_output[0]) + " | " + str(xyz_output[1]) + " | " + str(xyz_output[2])
-            
-            print(final_output)
-            for e in range(2):
-                #popping brings the last value from the previous list to the first value of the next list, which is bad
-                #all_xyz_values.pop(0)
-                del xyz_output[:3]
-                break
-            x = x-1
-            
-        print("\n\n########################################################################################\n\n")
-        
+    # once we are out of the loop asking yes or no, we then either start the program over or end it
+    if run_again == "yes":
+        continue
+    elif run_again == "no":
         break
-        
-    break
 
 # END --------------------------------------------------------------------------------------
 
