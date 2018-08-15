@@ -3,6 +3,15 @@ Gravity Simulator
 
 A gravity simulator in python
 
+Version 1.2 released August 15, 2018 at 1:00am
++ Improved and simplified the program so that x y z coordinates can be inputted from 1 line (instead of 3)
++ Made it so the program cannot be broken by failing to enter 3 numbers in the 1 line inputs for x y z coordinates
++ Made it so that the program cannot be broken by entering in a wrong data type anywhere (such as a string where an integer is expected)
++ Added function strings in more places
++ Set a limit for the mass of objects
++ Bolded the headings of the table outputs
++ Added an option at the end to either run the program again or end it
+
 Version 1.1 released August 14, 2018 at 12:30am
 + Updated Gravity Simulator to actually do something useful!
 + Removed tons of useless code
